@@ -1,8 +1,12 @@
 import React from 'react';
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {nanoid} from '@reduxjs/toolkit';
-import {View, FlatList, TouchableOpacity, SafeAreaView, Text} from 'react-native';
+import {
+  View,
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+} from 'react-native';
 
 import {getHistory} from '../redux/jokesOperations';
 import {selectJokesHistory} from '../redux/selectors';
@@ -11,6 +15,7 @@ import JokeItem from '../components/JokeItem';
 import ScreenTitle from '../components/ScreenTitle';
 import useFetchProgress from '../hooks/useFetchProgress';
 import Loader from '../components/Loader';
+import commonStyles from '../commonStyles';
 
 const History = () => {
   const dispatch = useDispatch();
@@ -21,15 +26,12 @@ const History = () => {
     dispatch(getHistory());
   }, []);
 
-
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
-      <View style={{flexDirection: 'row'}}>
-        <ScreenTitle title="History" />
-      </View>
-      <View style={{borderBottomColor: '#E6E6E6', borderBottomWidth: 1}}></View>
+    <SafeAreaView style={styles.screen}>
+      <ScreenTitle title="History" />
+      <View style={styles.titleUnderline}></View>
       {error ? (
-        <Text>{error}</Text>
+        <Error text={error} />
       ) : isLoading ? (
         <Loader text="Wait..." />
       ) : (
@@ -37,11 +39,22 @@ const History = () => {
           style={{flex: 1}}
           data={jokesHistory}
           renderItem={({item}) => <JokeItem joke={item} type="list" />}
-          keyExtractor={() => nanoid()}
+          keyExtractor={item => item.id}
         />
       )}
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: commonStyles.backgroundColor,
+  },
+  titleUnderline: {
+    borderBottomColor: commonStyles.secondaryColor,
+    borderBottomWidth: 1,
+  },
+});
 
 export default History;

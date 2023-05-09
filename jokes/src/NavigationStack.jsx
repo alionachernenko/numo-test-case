@@ -6,6 +6,7 @@ import Today from './screens/Today';
 import History from './screens/History';
 import TodayIcon from '../assets/icons/Today';
 import HistoryIcon from '../assets/icons/History';
+import commonStyles from './commonStyles';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,8 +28,8 @@ const NavigationStack = () => {
             fontSize: 12,
             marginBottom: 10,
           },
-          tabBarActiveTintColor: '#9763FF',
-          tabBarInactiveTintColor: '#C1C3C6',
+          tabBarActiveTintColor: commonStyles.accentColor,
+          tabBarInactiveTintColor: commonStyles.secondaryColor,
           headerShown: false,
         }}>
         <Tab.Screen

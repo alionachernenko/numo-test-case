@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import commonStyles from '../commonStyles';
 
-const Loader = ({text}) => {
+const Error = ({text}) => {
   return <Text style={styles.text}>{text}</Text>;
 };
 
@@ -15,4 +15,4 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
 });
-export default Loader;
+export default Error;

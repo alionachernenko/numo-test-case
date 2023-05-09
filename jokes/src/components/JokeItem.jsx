@@ -2,6 +2,7 @@ import {memo} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import LikeButton from './LikeButton';
+import commonStyles from '../commonStyles';
 
 const JokeItem = memo(({joke, type}) => {
   return (
@@ -19,13 +20,13 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   text: {
-    color: '#000',
+    color: commonStyles.primaryColor,
     fontFamily: 'Inter-Medium',
   },
   list: {
     flexDirection: 'row',
     borderBottomWidth: 1,
-    borderBottomColor: '#E6E6E6',
+    borderBottomColor: commonStyles.secondaryColor,
     alignContent: 'space-between',
 
     text: {
@@ -59,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JokeItem
+export default JokeItem;

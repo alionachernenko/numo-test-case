@@ -23,11 +23,13 @@ export const getNewJoke = createAsyncThunk(
           isFavourite: false,
         };
 
+        await setItem('joke', newJoke);
+
         const history = await getItem('history');
 
         if (!history || history.length === 0) {
-          await setItem('history', newJoke);
-        } else {
+          await setItem('history', [newJoke]);
+        } else if (history) {
           const newHistory = [newJoke, ...history];
           await setItem('history', newHistory);
         }
@@ -36,6 +38,7 @@ export const getNewJoke = createAsyncThunk(
         return newJoke;
       }
     } catch (error) {
+      console.log(error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   },
