@@ -1,11 +1,13 @@
 import {memo} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import LikeButton from './LikeButton';
 
-export const JokeItem = memo(({joke}) => {
+const JokeItem = memo(({joke, type}) => {
   return (
-    <View style={styles.item}>
-      <Text style={styles.text}>{joke.text}</Text>
+    <View style={{...styles.item, ...styles[type]}}>
+      <Text style={{...styles.text, ...styles[type].text}}>{joke.text}</Text>
+      <LikeButton type={type} joke={joke} />
     </View>
   );
 });
@@ -14,12 +16,47 @@ const styles = StyleSheet.create({
   item: {
     width: '100%',
     padding: 24,
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E6E6E6',
+    gap: 10,
   },
   text: {
     color: '#000',
-    fontSize: 16,
+    fontFamily: 'Inter-Medium',
+  },
+  list: {
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E6E6E6',
+    alignContent: 'space-between',
+
+    text: {
+      fontSize: 16,
+      lineHeight: 26,
+      maxWidth: 260,
+    },
+
+    like: {
+      width: 48,
+      height: 48,
+      marginLeft: 'auto',
+    },
+  },
+  today: {
+    flexDirection: 'column',
+    text: {
+      fontSize: 24,
+      lineHeight: 38,
+    },
+    like: {
+      width: 64,
+      height: 64,
+    },
+  },
+
+  like: {
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
+
+export default JokeItem
