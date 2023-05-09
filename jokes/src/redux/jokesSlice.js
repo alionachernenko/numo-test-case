@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {getNewJoke} from './jokesOperations';
+import {getHistory, getNewJoke} from './jokesOperations';
 
 const initialState = {
   todayJoke: {
@@ -14,7 +14,11 @@ const jokesSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder.addCase(getNewJoke.fulfilled, (state, {payload}) => {
+      console.log('pay');
       state.todayJoke = payload;
+    });
+    builder.addCase(getHistory.fulfilled, (state, {payload}) => {
+      state.jokesHistory = payload;
     });
   },
 });
