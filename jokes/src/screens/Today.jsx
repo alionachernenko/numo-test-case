@@ -12,7 +12,6 @@ import {getNewJoke} from '../redux/jokesOperations';
 import {selectJoke} from '../redux/selectors';
 import useFetchProgress from '../hooks/useFetchProgress';
 import commonStyles from '../commonStyles';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const screenHeight = Dimensions.get('screen').height;
 
@@ -29,7 +28,6 @@ const Today = () => {
     <SafeAreaView style={styles.screen}>
       <ScreenTitle title="Today" />
       <View style={styles.titleUnderline}></View>
-      <Button onPress={() => AsyncStorage.clear()} title='clear'/>
       <ScrollView>
         <View style={styles.contentWrapper}>
           {error ? (
