@@ -61,8 +61,7 @@ export const toggleLike = createAsyncThunk(
       const {todayJoke, jokesHistory} = thunkAPI.getState().jokes;
 
       const updatedJoke = {
-        id: joke.id,
-        text: joke.text,
+        ...joke,
         isFavourite: !joke.isFavourite,
       };
 
