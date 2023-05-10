@@ -13,6 +13,7 @@ export const getNewJoke = createAsyncThunk(
 
       if (isDateToday(date)) {
         const joke = await getStorageItem('joke');
+        console.log('today');
         return joke;
       } else {
         const joke = await fetchJoke();
@@ -25,15 +26,13 @@ export const getNewJoke = createAsyncThunk(
 
         await setStorageItem('joke', newJoke);
 
-        const history = await getStorageItem('history');
-
-        if (!history || history.length === 0) {
-          await setStorageItem('history', [newJoke]);
-        } else if (history) {
-          const newHistory = [newJoke, ...history];
-          await setStorageItem('history', newHistory);
-        }
-        await setStorageItem('date', todaysDate);
+        await Promise.all([
+          setStorageItem('date', todaysDate),
+          getStorageItem('history').then(history => {
+            const newHistory = history ? [{...newJoke}, ...history] : [{...newJoke}];
+            return setStorageItem('history', newHistory);
+          })
+        ]);
         return newJoke;
       }
     } catch (error) {
