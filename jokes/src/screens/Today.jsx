@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Text, View, ScrollView, Dimensions, StyleSheet} from 'react-native';
+import {Text, View, ScrollView, Dimensions, StyleSheet, Button} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import ScreenTitle from '../components/ScreenTitle';
@@ -12,6 +12,7 @@ import {getNewJoke} from '../redux/jokesOperations';
 import {selectJoke} from '../redux/selectors';
 import useFetchProgress from '../hooks/useFetchProgress';
 import commonStyles from '../commonStyles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const screenHeight = Dimensions.get('screen').height;
 

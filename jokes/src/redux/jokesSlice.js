@@ -50,7 +50,7 @@ const jokesSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.jokesHistory = payload.updatedHistory;
-        state.todayJoke = payload.updatedJoke;
+        state.todayJoke = payload.currentJoke;
       })
       .addCase(toggleLike.rejected, handleRejected)
   },

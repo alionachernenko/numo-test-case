@@ -61,6 +61,7 @@ export const toggleLike = createAsyncThunk(
       const {todayJoke, jokesHistory} = thunkAPI.getState().jokes;
 
       const updatedJoke = {
+        id: joke.id,
         text: joke.text,
         isFavourite: !joke.isFavourite,
       };
@@ -68,11 +69,12 @@ export const toggleLike = createAsyncThunk(
       const updatedHistory = jokesHistory.map(historyJoke =>
         joke.id === historyJoke.id ? updatedJoke : historyJoke,
       );
+      const currentJoke = joke.id === todayJoke.id ? updatedJoke : todayJoke;
 
       await setStorageItem('history', updatedHistory);
-      if (joke.text === todayJoke.text) await setStorageItem('joke', updatedJoke);
+      await setStorageItem('joke', currentJoke);
 
-      return {updatedHistory, updatedJoke};
+      return {updatedHistory, currentJoke};
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
