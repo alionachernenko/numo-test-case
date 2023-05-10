@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Text, View, ScrollView, Dimensions, StyleSheet, Button} from 'react-native';
+import {Text, View, ScrollView, Dimensions, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import ScreenTitle from '../components/ScreenTitle';

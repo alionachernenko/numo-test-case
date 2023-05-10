@@ -11,7 +11,7 @@ export const getNewJoke = createAsyncThunk(
     try {
       const date = await getStorageItem('date');
 
-      if (isDateToday(10)) {
+      if (isDateToday(date)) {
         const joke = await getStorageItem('joke');
         return joke;
       } else {
